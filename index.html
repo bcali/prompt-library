@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BC Prompt Library - Interactive Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .filter-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .stat {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .stat strong {
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .prompt-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .prompt-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .prompt-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #333;
+            flex: 1;
+        }
+
+        .category-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .category-ai { background: #e3f2fd; color: #1976d2; }
+        .category-productivity { background: #f3e5f5; color: #7b1fa2; }
+        .category-pm { background: #e8f5e9; color: #388e3c; }
+        .category-discovery { background: #fff3e0; color: #f57c00; }
+        .category-strategy { background: #fce4ec; color: #c2185b; }
+        .category-analytics { background: #e0f2f1; color: #00796b; }
+        .category-operations { background: #f1f8e9; color: #689f38; }
+        .category-gtm { background: #ede7f6; color: #5e35b1; }
+        .category-career { background: #e8eaf6; color: #3f51b5; }
+
+        .prompt-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .meta-tag {
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .use-case {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .prompt-preview {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            color: #666;
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .prompt-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(transparent, #f8f9fa);
+        }
+
+        .view-btn {
+            margin-top: 16px;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .view-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 32px;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .modal-body {
+            padding: 32px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: #f5f5f5;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+
+        .prompt-full {
+            background: #f8f9fa;
+            padding: 24px;
+            border-radius: 12px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin-top: 24px;
+        }
+
+        .copy-btn {
+            position: sticky;
+            top: 16px;
+            float: right;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 5;
+        }
+
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .prompts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 BC Prompt Library</h1>
+            <p class="subtitle">82 AI prompts for product management, strategy, and operations</p>
+        </header>
+
+        <div class="search-section">
+            <input 
+                type="text" 
+                class="search-box" 
+                id="searchBox" 
+                placeholder="Search prompts by name, use case, or keywords..."
+            >
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Category</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Tool</label>
+                    <select id="toolFilter">
+                        <option value="">All Tools</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Technique</label>
+                    <select id="techniqueFilter">
+                        <option value="">All Techniques</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat">
+                    <strong id="totalCount">0</strong> prompts
+                </div>
+                <div class="stat">
+                    <strong id="filteredCount">0</strong> showing
+                </div>
+            </div>
+        </div>
+
+        <div class="prompts-grid" id="promptsGrid"></div>
+        
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-state-icon">🔍</div>
+            <h3>No prompts found</h3>
+            <p>Try adjusting your search or filters</p>
+        </div>
+    </div>
+
+    <div class="modal" id="promptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="prompt-meta" id="modalMeta"></div>
+            </div>
+            <div class="modal-body">
+                <button class="copy-btn" onclick="copyPrompt()">📋 Copy Prompt</button>
+                <div class="use-case" id="modalUseCase" style="display: -webkit-box;"></div>
+                <div class="prompt-full" id="modalPrompt"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="prompts-data.js"></script>
+    <script>
+        let allPrompts = [];
+        let filteredPrompts = [];
+
+        function getCategoryClass(category) {
+            const map = {
+                'AI Features': 'category-ai',
+                'Productivity': 'category-productivity',
+                'PM Artifacts': 'category-pm',
+                'Discovery': 'category-discovery',
+                'Strategy & Planning': 'category-strategy',
+                'Analytics': 'category-analytics',
+                'Operations': 'category-operations',
+                'GTM': 'category-gtm',
+                'Career': 'category-career'
+            };
+            return map[category] || 'category-ai';
+        }
+
+        function renderPrompts() {
+            const grid = document.getElementById('promptsGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (filteredPrompts.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            grid.innerHTML = filteredPrompts.map(prompt => `
+                <div class="prompt-card" onclick='openModal(${JSON.stringify(prompt).replace(/'/g, "&#39;")})'>
+                    <div class="prompt-header">
+                        <div class="prompt-title">${prompt.name}</div>
+                        <span class="category-badge ${getCategoryClass(prompt.category)}">${prompt.category}</span>
+                    </div>
+                    
+                    <div class="prompt-meta">
+                        ${prompt.tools ? `<span class="meta-tag">🛠️ ${prompt.tools}</span>` : ''}
+                        ${prompt.technique ? `<span class="meta-tag">💡 ${prompt.technique.substring(0, 30)}...</span>` : ''}
+                    </div>
+                    
+                    ${prompt.useCase ? `<div class="use-case">${prompt.useCase}</div>` : ''}
+                    
+                    <div class="prompt-preview">${(prompt.prompt || '').substring(0, 200)}...</div>
+                    
+                    <button class="view-btn">View Full Prompt →</button>
+                </div>
+            `).join('');
+            
+            document.getElementById('filteredCount').textContent = filteredPrompts.length;
+        }
+
+        function openModal(prompt) {
+            document.getElementById('modalTitle').textContent = prompt.name;
+            document.getElementById('modalUseCase').textContent = prompt.useCase || '';
+            document.getElementById('modalPrompt').textContent = prompt.prompt || 'No prompt content available';
+            
+            const meta = document.getElementById('modalMeta');
+            meta.innerHTML = `
+                <span class="category-badge ${getCategoryClass(prompt.category)}">${prompt.category}</span>
+                ${prompt.tools ? `<span class="meta-tag">🛠️ ${prompt.tools}</span>` : ''}
+                ${prompt.technique ? `<span class="meta-tag">💡 ${prompt.technique}</span>` : ''}
+            `;
+            
+            document.getElementById('promptModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('promptModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function copyPrompt() {
+            const text = document.getElementById('modalPrompt').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✓ Copied!';
+                setTimeout(() => btn.textContent = originalText, 2000);
+            });
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const tool = document.getElementById('toolFilter').value;
+            const technique = document.getElementById('techniqueFilter').value;
+            
+            filteredPrompts = allPrompts.filter(prompt => {
+                const matchesSearch = !searchTerm || 
+                    prompt.name.toLowerCase().includes(searchTerm) ||
+                    (prompt.useCase && prompt.useCase.toLowerCase().includes(searchTerm)) ||
+                    (prompt.prompt && prompt.prompt.toLowerCase().includes(searchTerm));
+                
+                const matchesCategory = !category || prompt.category === category;
+                const matchesTool = !tool || (prompt.tools && prompt.tools.includes(tool));
+                const matchesTechnique = !technique || (prompt.technique && prompt.technique.includes(technique));
+                
+                return matchesSearch && matchesCategory && matchesTool && matchesTechnique;
+            });
+            
+            renderPrompts();
+        }
+
+        function initializeFilters() {
+            const categories = [...new Set(allPrompts.map(p => p.category))].sort();
+            const tools = [...new Set(allPrompts.flatMap(p => 
+                p.tools ? p.tools.split(',').map(t => t.trim()) : []
+            ))].sort();
+            const techniques = [...new Set(allPrompts.map(p => p.technique).filter(Boolean))].sort();
+            
+            document.getElementById('categoryFilter').innerHTML = 
+                '<option value="">All Categories</option>' +
+                categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            
+            document.getElementById('toolFilter').innerHTML = 
+                '<option value="">All Tools</option>' +
+                tools.map(t => `<option value="${t}">${t}</option>`).join('');
+            
+            document.getElementById('techniqueFilter').innerHTML = 
+                '<option value="">All Techniques</option>' +
+                techniques.map(t => `<option value="${t}">${t.substring(0, 40)}...</option>`).join('');
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            allPrompts = window.promptsData || [];
+            filteredPrompts = allPrompts;
+            
+            document.getElementById('totalCount').textContent = allPrompts.length;
+            document.getElementById('filteredCount').textContent = allPrompts.length;
+            
+            initializeFilters();
+            renderPrompts();
+            
+            document.getElementById('searchBox').addEventListener('input', applyFilters);
+            document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+            document.getElementById('toolFilter').addEventListener('change', applyFilters);
+            document.getElementById('techniqueFilter').addEventListener('change', applyFilters);
+            
+            // Close modal on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+            
+            // Close modal on background click
+            document.getElementById('promptModal').addEventListener('click', (e) => {
+                if (e.target.id === 'promptModal') closeModal();
+            });
+        });
+    </script>
+</body>
+</html>
+

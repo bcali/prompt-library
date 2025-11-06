@@ -1,0 +1,202 @@
+{
+  "Slack Thread Synthesizer": {
+    "prefix": "prompt-slack",
+    "body": [
+      "<slack_thread_synthesizer>",
+      "",
+      "<thread_inputs>",
+      "PASTE THE SLACK THREAD:",
+      "${1:[Full thread content - copy/paste from Slack]}",
+      "",
+      "CONTEXT QUESTIONS:",
+      "1. Why are you reading this? ${2:catching up after vacation}",
+      "2. What's your role in this discussion? ${3:decision-maker}",
+      "3. Are there specific people whose opinions matter most to you?",
+      "4. What decisions or action items are you hoping to find?",
+      "5. How much detail do you need? (quick skim vs. deep understanding)",
+      "</thread_inputs>",
+      "",
+      "</slack_thread_synthesizer>",
+      "$0"
+    ],
+    "description": "Synthesize long Slack threads into clear, actionable summaries"
+  },
+  
+  "Feature Prioritization": {
+    "prefix": "prompt-prioritize",
+    "body": [
+      "<feature_prioritization>",
+      "",
+      "<prioritization_inputs>",
+      "FEATURES TO EVALUATE:",
+      "${1:[List your features here]}",
+      "",
+      "YOUR CONTEXT:",
+      "- North Star Metric: ${2:[What matters]}",
+      "- Team size: ${3:[Number of engineers]}",
+      "- Timeline: ${4:[Your deadline]}",
+      "</prioritization_inputs>",
+      "",
+      "Now prioritize these features by ROI (dollar impact vs dollar cost).",
+      "",
+      "</feature_prioritization>",
+      "$0"
+    ],
+    "description": "Calculate ROI and prioritize competing features"
+  },
+  
+  "Write PRD": {
+    "prefix": "prompt-prd",
+    "body": [
+      "<prd_generator>",
+      "",
+      "<pm_inputs>",
+      "CORE CONTEXT:",
+      "1. What are you building? ${1:[feature/product description]}",
+      "2. What user problem does this solve? ${2:[pain point, not solution]}",
+      "3. Who are the target users? ${3:[specific segments]}",
+      "4. What's the current state? ${4:[baseline metrics]}",
+      "5. What does success look like? ${5:[specific outcomes and metrics]}",
+      "6. Why now? ${6:[market timing, competitive pressure]}",
+      "7. Why us? ${7:[unique advantage]}",
+      "",
+      "RESEARCH & VALIDATION:",
+      "8. What user research validates this problem?",
+      "9. What have you tried before?",
+      "10. What do competitors do?",
+      "",
+      "CONSTRAINTS & DEPENDENCIES:",
+      "12. When must this ship and why?",
+      "13. Who's available to build this?",
+      "14. What technical debt or constraints affect this?",
+      "</pm_inputs>",
+      "",
+      "</prd_generator>",
+      "$0"
+    ],
+    "description": "Generate comprehensive PRD from requirements"
+  },
+  
+  "User Research Synthesis": {
+    "prefix": "prompt-research",
+    "body": [
+      "<user_research_synthesizer>",
+      "",
+      "<research_inputs>",
+      "RESEARCH MATERIALS:",
+      "${1:[Upload or paste interview transcripts, survey results, etc.]}",
+      "",
+      "CONTEXT QUESTIONS:",
+      "1. What are you trying to learn? ${2:[research goals/questions]}",
+      "2. Who are these users? ${3:[segments, demographics]}",
+      "3. What decisions will this research inform? ${4:[product, strategy, roadmap]}",
+      "4. Are there any hypotheses you're testing?",
+      "5. Who's the audience for the synthesis? ${5:[executives, designers, engineers]}",
+      "</research_inputs>",
+      "",
+      "</user_research_synthesizer>",
+      "$0"
+    ],
+    "description": "Synthesize user research into actionable insights"
+  },
+  
+  "AI Product Strategy": {
+    "prefix": "prompt-ai-strategy",
+    "body": [
+      "<ai_product_strategy>",
+      "",
+      "<strategy_inputs>",
+      "YOUR PRODUCT:",
+      "${1:[What you build today]}",
+      "",
+      "TARGET MARKET:",
+      "${2:[Who you serve]}",
+      "",
+      "BUSINESS GOAL:",
+      "${3:[What AI needs to accomplish]}",
+      "",
+      "COMPETITIVE CONTEXT:",
+      "${4:[Who else is doing AI in your space]}",
+      "",
+      "RESOURCES:",
+      "- Team: ${5:[AI expertise level]}",
+      "- Budget: ${6:[Available resources]}",
+      "- Timeline: ${7:[When you need to ship]}",
+      "</strategy_inputs>",
+      "",
+      "</ai_product_strategy>",
+      "$0"
+    ],
+    "description": "Build AI product strategy from scratch"
+  },
+  
+  "Feature Request Analysis": {
+    "prefix": "prompt-feature-requests",
+    "body": [
+      "<feature_request_analyzer>",
+      "",
+      "<request_inputs>",
+      "FEATURE REQUEST DATA:",
+      "${1:[Upload CSV, spreadsheet, or paste requests]}",
+      "",
+      "CONTEXT QUESTIONS:",
+      "1. Where are these requests from? ${2:[sales calls, support tickets, etc.]}",
+      "2. What's the time period? ${3:[last month, quarter, year]}",
+      "3. How many total requests? ${4:[number]}",
+      "4. What decisions will this inform? ${5:[roadmap, prioritization]}",
+      "</request_inputs>",
+      "",
+      "</feature_request_analyzer>",
+      "$0"
+    ],
+    "description": "Analyze and prioritize feature requests from customers"
+  },
+  
+  "Create User Stories": {
+    "prefix": "prompt-user-stories",
+    "body": [
+      "<user_story_generator>",
+      "",
+      "<story_inputs>",
+      "WHAT YOU'RE BUILDING:",
+      "1. Feature description: ${1:[what you're building]}",
+      "2. Target users: ${2:[who will use this]}",
+      "3. User research/context: ${3:[why this matters]}",
+      "4. Technical constraints: ${4:[if any]}",
+      "5. Success criteria: ${5:[how we'll measure]}",
+      "</story_inputs>",
+      "",
+      "</user_story_generator>",
+      "$0"
+    ],
+    "description": "Generate user stories with acceptance criteria"
+  },
+  
+  "Product Roadmap": {
+    "prefix": "prompt-roadmap",
+    "body": [
+      "<product_roadmap>",
+      "",
+      "<roadmap_inputs>",
+      "WHERE YOU NEED TO BE:",
+      "${1:[6-month vision - capabilities, not features]}",
+      "",
+      "BUSINESS GOAL:",
+      "${2:[Revenue target, market position, competitive defense]}",
+      "",
+      "HARD CONSTRAINTS:",
+      "- Timeline: ${3:[Why this timeframe]}",
+      "- Commitments: ${4:[What must ship]}",
+      "- Resources: ${5:[Team size, bottlenecks]}",
+      "",
+      "CURRENT STATE:",
+      "${6:[What exists today, technical debt]}",
+      "</roadmap_inputs>",
+      "",
+      "</product_roadmap>",
+      "$0"
+    ],
+    "description": "Build phased product roadmap"
+  }
+}
+
