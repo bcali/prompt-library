@@ -27,17 +27,23 @@
 
 ### Browse the Library
 
-**Option 1: Markdown File** (Best for copying prompts)
+**Option 1: Use in Cursor** ⭐ NEW!
+- Install the MCP server (2 minutes)
+- Access any prompt with simple commands
+- Search, browse, and use prompts without leaving Cursor
+- **[→ Quick Setup Guide](./QUICK_START.md)**
+
+**Option 2: Markdown File** (Best for copying prompts)
 - Open [`BC-Prompt-Library.md`](./BC-Prompt-Library.md)
 - Use Ctrl+F to search
 - Click to expand prompts
 
-**Option 2: Interactive Search** (Best for discovery)
+**Option 3: Interactive Search** (Best for discovery)
 - Visit the [searchable web app](https://bcali.github.io/prompt-library/)
 - Filter by category, tool, or use case
 - Instant search across all prompts
 
-**Option 3: Download Excel**
+**Option 4: Download Excel**
 - Download [`BC Prompt Library.xlsx`](./BC%20Prompt%20Library.xlsx)
 - Filter, sort, and customize in Excel
 - Export to your own tools

@@ -1,7 +1,7 @@
 # BC Prompt Library
 
 > A comprehensive collection of AI prompts for product management, strategy, and operations.
-> **Total Prompts:** 82 | **Last Updated:** November 6, 2025
+> **Total Prompts:** 83 | **Last Updated:** January 22, 2026
 
 ---
 
@@ -9,7 +9,7 @@
 
 ### By Category
 - [AI Features](#ai-features) (6 prompts)
-- [Productivity](#productivity) (13 prompts)
+- [Productivity](#productivity) (14 prompts)
 - [PM Artifacts](#pm-artifacts) (11 prompts)
 - [Discovery](#discovery) (11 prompts)
 - [Strategy & Planning](#strategy--planning) (11 prompts)
@@ -1423,7 +1423,7 @@ Ship it, learn from it, then expand.
 
 ## Productivity
 
-*13 prompts in this category*
+*14 prompts in this category*
 
 ### Catch Up on Slack Threads
 
@@ -4772,6 +4772,312 @@ Would either of those address what you're trying to accomplish? If not, let's ge
 [Your name]
 
 </say_no_gracefully>
+```
+
+</details>
+
+---
+
+### Executive Presentation Builder (Gamma)
+
+**📋 Use Case:** Creating compelling presentations for senior executives and business stakeholders using your pre-configured Gamma template
+
+**🛠️ Recommended Tools:** Gamma.app API with template ID: `g_adrwbl6rdw9d501`
+
+**💡 Technique:** Executive storytelling with pyramid principle - leading with conclusions, using data-driven narratives, and focusing on business impact over features. Optimized for C-suite attention spans (5-7 minutes).
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<executive_gamma_presentation>
+
+<presentation_inputs>
+PRESENTATION TOPIC:
+[What you're presenting - product update, strategy proposal, quarterly results, etc.]
+
+TARGET AUDIENCE:
+[Specific executives - CEO, CFO, Board, C-suite, etc.]
+
+PRESENTATION GOAL:
+[What you need from them - decision, funding approval, strategic alignment, awareness]
+
+KEY MESSAGE:
+[The one thing they must remember - your bottom line]
+
+CONTEXT:
+- Current situation: [What they already know]
+- What's changed: [Why you're presenting now]
+- Their concerns: [What keeps them up at night about this topic]
+- Time available: [5 min, 15 min, 30 min]
+
+SUPPORTING DATA:
+[Metrics, case studies, competitive intel, financial impact, customer feedback]
+</presentation_inputs>
+
+<gamma_template_config>
+TEMPLATE ID: g_adrwbl6rdw9d501
+
+This presentation will use your pre-configured executive template optimized for business stakeholders and senior leadership.
+
+When creating via Gamma API, use:
+- Template: g_adrwbl6rdw9d501
+- Style: Maintain template's professional executive format
+- Structure: Follow template's slide layouts
+</gamma_template_config>
+
+<executive_presentation_framework>
+
+You create executive presentations that drive decisions, not just inform. Your presentations follow the pyramid principle: conclusion first, then supporting evidence.
+
+---
+
+PHASE 1: STRUCTURE THE NARRATIVE
+
+Build using the Executive Story Arc (5-9 slides):
+
+1. THE HOOK (Slide 1)
+   - Start with the decision or outcome you need
+   - Frame in terms of business impact they care about
+   - Make it urgent: Why now?
+
+Example formats:
+- "We need $2M to capture 40% market share in Q2"
+- "Three strategic options for our AI roadmap - decision needed by Friday"
+- "Q4 results: We beat targets and here's the playbook to repeat it"
+
+2. THE SITUATION (Slides 2-3)
+   - What's happening in the market/business
+   - The opportunity or problem (with quantification)
+   - Why the status quo won't work
+
+Keep it crisp:
+- Market context: 2-3 key facts
+- The gap or opportunity: One clear statement with numbers
+- Cost of inaction: Specific impact
+
+3. THE ANALYSIS (Slides 4-6)
+   - What you investigated or tested
+   - Options considered (show you did the thinking)
+   - Why you're recommending this path
+
+For executives:
+- Show tradeoffs, not just benefits
+- Include risks and mitigation
+- Competitive context
+- Resource requirements (realistic)
+
+4. THE RECOMMENDATION (Slides 7-8)
+   - Specific action you want them to take
+   - Expected outcomes with timeline
+   - Success metrics
+   - Investment required (time, money, people)
+
+Format:
+- Clear ask: "Approve $X budget for Y initiative"
+- Success looks like: "In 6 months, we'll have [specific outcome]"
+- We'll measure: [2-3 key metrics]
+- Risk if we don't: [specific downside]
+
+5. THE CLOSE (Slide 9)
+   - Next steps with owners and dates
+   - What you need from them specifically
+   - How you'll keep them updated
+
+---
+
+PHASE 2: DESIGN FOR EXECUTIVE CONSUMPTION
+
+Apply these principles for senior stakeholder presentations:
+
+VISUAL HIERARCHY
+- One key message per slide (not multiple points)
+- Data should jump off the page: big numbers, clear charts
+- Use callout boxes for critical insights
+- Color code: Green for wins, red for risks, blue for information
+
+SLIDE FORMULAS
+
+**For Strategy Slides:**
+- Big bold headline: The decision or recommendation
+- 3 supporting points maximum
+- Visual: Market map, competitive positioning, or strategic framework
+- Bottom line: Expected impact in dollars or key metric
+
+**For Data Slides:**
+- Chart/graph takes 60% of slide
+- Headline interprets the data (not just "Q4 Results")
+- Annotation: Circle or highlight the most important data point
+- So what?: What this means for the business
+
+**For Options Slides:**
+- Table or matrix comparing 2-4 options
+- Criteria that matter to executives: ROI, risk, time to value, strategic fit
+- Recommended option highlighted
+- Why this one: 1-2 sentences
+
+EXECUTIVE READING PATTERNS
+- They scan top-to-bottom, left-to-right
+- They look at visuals before text
+- They want the punchline immediately
+- They'll interrupt if confused - make it scannable
+
+---
+
+PHASE 3: CONTENT GUIDELINES
+
+WRITING RULES
+- Headlines are conclusions, not topics
+  - ❌ "Q4 Performance"
+  - ✅ "Q4 exceeded targets by 23% - here's how we'll repeat it"
+
+- Use specific numbers, not adjectives
+  - ❌ "Significantly improved retention"
+  - ✅ "Retention increased from 68% to 82% (14 pp gain)"
+
+- Business impact > technical details
+  - ❌ "Implemented microservices architecture"
+  - ✅ "Reduced deployment time 80%, enabling weekly releases"
+
+WHAT TO INCLUDE
+- Financial impact (revenue, cost savings, ROI)
+- Customer impact (satisfaction scores, retention, case studies)
+- Competitive position (vs. specific competitors, market share)
+- Risk factors (what could go wrong, mitigation plan)
+- Resource needs (budget, headcount, timeline)
+
+WHAT TO CUT
+- Technical jargon (unless presenting to technical execs)
+- Process details (they don't care how the sausage is made)
+- Historical context beyond what's essential
+- Features without business outcomes
+- Excessive animation or design flourishes
+
+---
+
+PHASE 4: ANTICIPATE QUESTIONS
+
+Prepare backup slides for predictable questions:
+
+C-SUITE QUESTION PATTERNS
+- CEO: "How does this fit our strategy? What's the competitive angle?"
+- CFO: "What's the ROI? What happens if we don't do this?"
+- CTO/COO: "Can we actually deliver this? What are the dependencies?"
+- Board: "What's the market opportunity? Why us? Why now?"
+
+BACKUP SLIDE TOPICS
+- Detailed financial model
+- Competitive comparison details
+- Implementation timeline with milestones
+- Team structure and hiring plan
+- Customer quotes or case studies
+- Technical architecture (if they ask "how")
+- Risk analysis with mitigation plans
+
+---
+
+PHASE 5: CREATE IN GAMMA
+
+Now build the presentation using template g_adrwbl6rdw9d501:
+
+CREATING WITH YOUR TEMPLATE
+1. Use Gamma API with template ID: g_adrwbl6rdw9d501
+2. Leverage template's pre-configured styling for consistency
+3. Follow template's slide layout patterns for professional polish
+
+GAMMA-SPECIFIC FEATURES TO LEVERAGE
+- Smart visual suggestions: Use for data visualization
+- AI image generation: For concept slides or metaphors
+- Embedded media: Charts from data sources, demo videos
+- Template components: Title slides, data viz, comparison tables
+
+FINAL CHECKLIST
+Before sharing:
+- [ ] Every slide has a clear headline that states a conclusion
+- [ ] No slide requires explanation to understand
+- [ ] Data visualizations have clear labels and highlighted insights
+- [ ] Financial impacts are specific (not "increased" but "increased X%")
+- [ ] The ask is crystal clear on the recommendation slide
+- [ ] Backup slides address predictable questions
+- [ ] Presentation works without speaker notes (for async review)
+- [ ] Mobile-readable (executives often review on phones)
+
+---
+
+Now create the executive presentation using template g_adrwbl6rdw9d501 and the provided context.
+
+</executive_presentation_framework>
+
+---
+
+## Example Slide Structure
+
+### Slide 1: The Hook
+**Headline:** "AI Initiative Delivered $4.2M Revenue Impact in Q4 - Expanding to 3 New Products"
+
+Visual: Large number ($4.2M) with arrow up
+Subtext: Built in 6 months with 4-person team | ROI: 340%
+
+---
+
+### Slide 2: The Situation
+**Headline:** "Customers Demanding AI Features - We're Winning Deals Because of It"
+
+Market context:
+- 73% of enterprise buyers now require AI capabilities (Gartner)
+- We've won 8 competitive deals specifically citing our AI features
+- Competitors announcing AI initiatives Q1 (must maintain lead)
+
+---
+
+### Slide 3: What We Did
+**Headline:** "Tested 3 AI Features → 1 Became Top Revenue Driver"
+
+[Table showing 3 features tested with metrics]
+Winner: AI-powered recommendations
+- Adoption: 64% of customers
+- Revenue impact: $4.2M
+- Customer satisfaction: +18 NPS points
+
+---
+
+### Slide 4: The Recommendation
+**Headline:** "Invest $2M to Expand AI to Products B, C, D → Est. $15M Annual Impact"
+
+The ask:
+- $2M budget (team + infrastructure)
+- 9-month timeline
+- 12-person team (8 eng, 2 PM, 2 design)
+
+Expected outcome:
+- $15M annual recurring revenue
+- 28% increase in average deal size
+- Maintain competitive differentiation
+
+Risk of waiting:
+- Competitors will close gap in 6-9 months
+- Window to establish leadership is now
+
+---
+
+### Slide 5: Next Steps
+**Headline:** "Need Approval by March 1 to Hit Q3 Launch"
+
+Timeline:
+- March 1: Approval & budget allocation
+- March 15: Team hired
+- April: Development begins
+- Q3: Product B launch
+- Q4: Products C & D launch
+
+What we need from you:
+✅ Budget approval ($2M)
+✅ Exec sponsor (recommendation: CPO)
+✅ Go/no-go decision by March 1
+
+Updates: Monthly business review + Slack updates on key milestones
+
+</executive_gamma_presentation>
 ```
 
 </details>
