@@ -1,7 +1,7 @@
 # BC Prompt Library
 
 > A comprehensive collection of AI prompts for product management, strategy, and operations.
-> **Total Prompts:** 83 | **Last Updated:** January 22, 2026
+> **Total Prompts:** 84 | **Last Updated:** January 23, 2026
 
 ---
 
@@ -12,7 +12,7 @@
 - [Productivity](#productivity) (14 prompts)
 - [PM Artifacts](#pm-artifacts) (11 prompts)
 - [Discovery](#discovery) (11 prompts)
-- [Strategy & Planning](#strategy--planning) (11 prompts)
+- [Strategy & Planning](#strategy--planning) (12 prompts)
 - [Analytics](#analytics) (10 prompts)
 - [Operations](#operations) (8 prompts)
 - [GTM](#gtm) (7 prompts)
@@ -11265,7 +11265,7 @@ Impact formula:
 
 ## Strategy & Planning
 
-*11 prompts in this category*
+*12 prompts in this category*
 
 ### Feature Prioritization
 
@@ -11414,6 +11414,30 @@ Risk: [What must be true]
 - Get: [Data needed] then re-evaluate
 
 </feature_prioritization>
+```
+
+</details>
+
+---
+
+### RICE Feature Scoring
+
+**📋 Use Case:** Score and prioritize features using the RICE framework
+
+**🛠️ Recommended Tools:** Claude, ChatGPT, or any LLM
+
+**💡 Technique:** Structured scoring with explicit rationale for assumptions and risks
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+RICE Score = (Reach × Impact × Confidence) / Effort
+
+Feature: [NAME]
+Reach: [NUMBER] | Impact: [SCORE] | Confidence: [%] | Effort: [WEEKS]
+Score: [CALCULATED]
+Rationale: [2-3 sentences on the biggest assumption or risk]
 ```
 
 </details>
