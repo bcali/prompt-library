@@ -1423,7 +1423,7 @@ Ship it, learn from it, then expand.
 
 ## Productivity
 
-*14 prompts in this category*
+*15 prompts in this category*
 
 ### Catch Up on Slack Threads
 
@@ -5078,6 +5078,42 @@ What we need from you:
 Updates: Monthly business review + Slack updates on key milestones
 
 </executive_gamma_presentation>
+```
+
+</details>
+
+---
+
+### Email Inbox Triage
+
+**📋 Use Case:** Quickly identify urgent emails and action items from the last 5 days
+
+**🛠️ Recommended Tools:** Gmail, Outlook, Claude integration
+
+**💡 Technique:** Structured categorization by urgency, sender importance, and dependency blocking
+
+<details>
+<parameter name="summary">Click to view prompt</summary>
+
+```
+Scan my inbox from the last 5 days. Create three sections:
+
+**PRIORITY ACTIONS**
+- Emails from executives, direct reports, or external partners requiring decisions
+- Anything with "urgent," "blocker," "approval needed," or deadline mentions
+- Calendar conflicts or meeting requests pending response
+
+**UNANSWERED THREADS**
+- Emails where I'm in the TO field (not CC) that I haven't replied to
+- Sort by sender seniority and days waiting
+- Flag any that mention waiting on me specifically
+
+**DEPENDENCY BLOCKERS**
+- Threads where someone is waiting on my input to proceed
+- Items I committed to deliver that appear unresolved
+- Approval requests or sign-offs pending my action
+
+Format as a table with: Sender | Subject | Days Old | Action Required
 ```
 
 </details>
