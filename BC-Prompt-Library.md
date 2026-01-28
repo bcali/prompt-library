@@ -1423,7 +1423,7 @@ Ship it, learn from it, then expand.
 
 ## Productivity
 
-*15 prompts in this category*
+*16 prompts in this category*
 
 ### Catch Up on Slack Threads
 
@@ -1638,6 +1638,101 @@ Remember: Slack threads often meander. Your job is to extract the structure and 
 </meta_guidance>
 
 </slack_thread_synthesizer>
+```
+
+</details>
+
+---
+
+### Convert Meeting Transcripts to Action Items
+
+**📋 Use Case:** Turn messy Teams/Zoom transcripts into formatted Word documents with clear action items and decisions
+
+**🛠️ Recommended Tools:** Claude, ChatGPT, or any LLM
+
+**💡 Technique:** Distills signal from noisy conversation, strips filler, captures substance with clear ownership
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<transcript_to_summary>
+
+<inputs>
+PASTE YOUR TRANSCRIPT:
+[Raw Teams/Zoom transcript - timestamps, speaker labels, the whole mess]
+
+MEETING CONTEXT:
+- Meeting type: [Sync, decision, brainstorm, review]
+- Attendees: [If not clear from transcript]
+- Your role: [What you need to track]
+
+OUTPUT FORMAT:
+- [ ] Executive summary (2-3 sentences)
+- [ ] Key topics discussed
+- [ ] Decisions made
+- [ ] Action items with owners
+- [ ] Open questions
+- [ ] All of the above
+</inputs>
+
+<conversion_framework>
+
+You're distilling signal from noisy conversation. Strip filler, capture substance.
+
+**Create a Word document (.docx) with the following structure:**
+
+## EXECUTIVE SUMMARY
+[2-3 sentences: What was this meeting about? What was accomplished?]
+
+## KEY TOPICS
+- **[Topic 1]**: [1-2 sentence summary of discussion]
+- **[Topic 2]**: [1-2 sentence summary of discussion]
+
+## DECISIONS MADE
+- [Decision 1]
+- [Decision 2]
+- [None explicitly made] ← flag if true
+
+## ACTION ITEMS
+| Owner | Action | Due Date |
+|-------|--------|----------|
+| [Name] | [Specific action] | [Date/TBD] |
+
+## OPEN QUESTIONS / PARKING LOT
+- [Unresolved topic]
+- [Who owns resolution / when revisit]
+
+</conversion_framework>
+
+<output_instructions>
+
+Save as: `[Meeting Name]_Summary_[YYYY-MM-DD].docx`
+
+Use professional formatting:
+- Calibri or Arial 11pt
+- Bold section headers
+- Table for action items
+- Page header with meeting date and attendees
+
+</output_instructions>
+
+<transcript_specific>
+
+Ignore:
+- Filler ("um", "you know", "let me think")
+- Side conversations
+- Technical difficulties discussion
+- Pleasantries unless context-relevant
+
+Flag when:
+- Speaker unclear on ownership
+- Decision implied but not confirmed
+- Timeline mentioned without commitment
+
+</transcript_specific>
+
+</transcript_to_summary>
 ```
 
 </details>
