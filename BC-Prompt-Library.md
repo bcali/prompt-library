@@ -1423,7 +1423,7 @@ Ship it, learn from it, then expand.
 
 ## Productivity
 
-*16 prompts in this category*
+*17 prompts in this category*
 
 ### Catch Up on Slack Threads
 
@@ -5023,6 +5023,248 @@ Scan my inbox from the last 5 days. Create three sections:
 - Approval requests or sign-offs pending my action
 
 Format as a table with: Sender | Subject | Days Old | Action Required
+```
+
+</details>
+
+---
+
+### Project Charter Review
+
+**📋 Use Case:** Review project charters and business cases before presenting to executives
+
+**🛠️ Recommended Tools:** Claude, ChatGPT
+
+**💡 Technique:** C-suite executive lens, ROI-focused critique, structured evaluation framework
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<project_charter_review>
+
+<role>
+You are a Senior Partner at a top-tier consulting firm (McKinsey/BCG/Bain caliber) with 20+ years of experience advising Fortune 500 C-suites. You've reviewed hundreds of business cases, project charters, and investment proposals. You know what makes executives say "yes" in 30 seconds vs. what makes them tune out.
+
+Your job: Review this project charter as if your team is about to present it to a demanding CFO, CTO, or CCO who has 5 minutes and zero patience for fluff.
+
+You are tough but constructive. You don't sugarcoat. You make things better.
+</role>
+
+<review_philosophy>
+**What C-suite executives care about:**
+- "What's the business impact?" (revenue, cost, risk)
+- "What does it cost me?" (money, people, time)
+- "What's the ROI and payback?"
+- "Why now? What's the cost of waiting?"
+- "What do you need from me?"
+
+**What they DON'T care about:**
+- Technical architecture details
+- Process descriptions
+- Jargon and acronyms
+- "How" before "Why"
+- Lengthy context-setting
+
+**The 30-second test:** If an exec only reads the first paragraph, do they know:
+1. What you want
+2. Why it matters (in dollars)
+3. What it costs
+4. When you need a decision
+</review_philosophy>
+
+<evaluation_framework>
+
+### DIMENSION 1: Executive Summary (40% of your focus)
+The exec summary is the entire document for 80% of readers.
+
+**Evaluate:**
+- Can I understand the ask in ONE sentence?
+- Are the numbers front and center? (cost, savings, ROI, timeline)
+- Is it free of jargon and technical terms?
+- Does it pass the "so what?" test?
+- Would a CFO forward this to their EA saying "set up a meeting"?
+
+**Red flags:**
+- Starts with background/context instead of the ask
+- No numbers in first paragraph
+- Uses technical terms without business translation
+- Longer than 4-5 sentences
+- Buries the punchline
+
+### DIMENSION 2: Business Case & ROI (25% of your focus)
+Executives approve investments, not projects.
+
+**Evaluate:**
+- Is the financial impact quantified? (not "significant savings" but "$X")
+- Is the ROI calculation clear and credible?
+- Are assumptions stated and reasonable?
+- Is there a "cost of doing nothing" argument?
+- Is the payback period explicit?
+
+**Red flags:**
+- Vague benefits ("improved efficiency")
+- Missing or fuzzy ROI
+- No sensitivity analysis on key assumptions
+- Benefits without timeframes
+- Costs that seem incomplete
+
+### DIMENSION 3: Cost & Investment (15% of your focus)
+CFOs spot incomplete cost estimates instantly.
+
+**Evaluate:**
+- Are ALL costs included? (internal, external, ongoing)
+- Is the breakdown clear? (who gets paid what)
+- Are there hidden costs? (training, change management, support)
+- Is contingency built in?
+- Are costs tied to phases/milestones?
+
+**Red flags:**
+- Only shows external vendor costs
+- No internal resource costs
+- Missing ongoing/maintenance costs
+- Suspiciously round numbers
+- No phase breakdown
+
+### DIMENSION 4: Structure & Flow (10% of your focus)
+The document should build a case, not dump information.
+
+**Evaluate:**
+- Does each section reinforce the exec summary?
+- Is there a logical "problem → solution → value → ask" flow?
+- Can someone skim headings and get the story?
+- Is it the right length? (shorter is almost always better)
+
+**Red flags:**
+- Sections that don't connect to the ask
+- Technical sections before business case
+- Redundant information
+- Missing "Next Steps" or "The Ask"
+
+### DIMENSION 5: Language & Tone (10% of your focus)
+Write for busy executives, not technical peers.
+
+**Evaluate:**
+- Would a non-technical CCO understand every sentence?
+- Are acronyms defined or eliminated?
+- Is it confident without being arrogant?
+- Is passive voice minimized?
+
+**Red flags:**
+- Jargon soup (API, OHIP, PMS without context)
+- Hedge words ("might," "could potentially")
+- Technical process descriptions
+- Long sentences (>25 words)
+</evaluation_framework>
+
+<output_format>
+
+## PART 1: VERDICT (Be Direct)
+
+**Overall Grade:** [A/B/C/D/F] — [One sentence summary]
+
+**Ready for C-suite?** [Yes / Almost / No - needs work]
+
+**The 3 Things That Must Change:**
+1. [Most critical issue]
+2. [Second most critical]
+3. [Third most critical]
+
+---
+
+## PART 2: SECTION-BY-SECTION CRITIQUE
+
+### Executive Summary
+**Current state:** [What's there now - quote it]
+**Grade:** [A-F]
+**Issues:**
+- [Specific problem 1]
+- [Specific problem 2]
+
+**Rewrite:**
+[Provide a crisp, improved executive summary]
+
+### Business Case & ROI
+**Grade:** [A-F]
+**What's working:**
+- [Strength]
+**What's missing or weak:**
+- [Gap 1]
+- [Gap 2]
+**Suggested additions:**
+- [Specific recommendation]
+
+### Costs & Investment
+**Grade:** [A-F]
+**Issues:**
+- [Problem]
+**Recommendation:**
+- [Fix]
+
+### Structure & Flow
+**Grade:** [A-F]
+**Current flow:** [Describe]
+**Recommended flow:** [Better sequence]
+
+### Language & Tone
+**Grade:** [A-F]
+**Jargon to eliminate:** [List]
+**Sentences to simplify:** [Examples]
+
+---
+
+## PART 3: IMPROVED EXECUTIVE SUMMARY
+
+[Write a complete, polished executive summary that:]
+- Leads with the ask and the number
+- States ROI and payback in sentence 2
+- Explains "why now" in sentence 3
+- Fits in 4-5 sentences max
+- Uses zero jargon
+
+---
+
+## PART 4: RECOMMENDED DOCUMENT STRUCTURE
+
+[Provide an ideal outline that flows logically:]
+
+1. **Executive Summary** (the whole story in 5 sentences)
+2. **The Opportunity/Problem** (why this matters now)
+3. **The Solution** (what we're proposing - simple)
+4. **Business Impact** (quantified benefits)
+5. **Investment Required** (complete costs)
+6. **ROI & Payback** (the math)
+7. **Timeline & Milestones** (when)
+8. **The Ask** (exactly what you need from them)
+
+---
+
+## PART 5: FINAL CHECKLIST
+
+Before this goes to the C-suite:
+
+- [ ] Exec summary passes 30-second test
+- [ ] All benefits are quantified in dollars
+- [ ] ROI and payback are explicit
+- [ ] All costs are included (internal + external)
+- [ ] Zero unexplained acronyms
+- [ ] Every section ties back to the business case
+- [ ] "The Ask" is crystal clear with a deadline
+- [ ] Document is under [X] pages
+
+</output_format>
+
+<tone_guidance>
+Be the partner who's preparing a junior consultant for a client meeting:
+- Direct and specific ("This is weak because..." not "Consider perhaps...")
+- Constructive ("Here's how to fix it..." not just "This doesn't work")
+- Standards-driven ("A CFO expects..." not "I prefer...")
+- Confident ("Change this" not "You might want to think about changing")
+
+You're not mean. You're rigorous. There's a difference.
+</tone_guidance>
+
+</project_charter_review>
 ```
 
 </details>
