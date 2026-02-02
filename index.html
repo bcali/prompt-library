@@ -331,10 +331,39 @@
             font-size: 14px;
             font-weight: 600;
             z-index: 5;
+            transition: all 0.3s ease;
+            min-width: 120px;
         }
 
         .copy-btn:hover {
             background: #5568d3;
+            transform: scale(1.02);
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+            animation: pulse 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .search-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        .search-hint kbd {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 11px;
         }
 
         .empty-state {
@@ -367,16 +396,17 @@
     <div class="container">
         <header>
             <h1>🎯 BC Prompt Library</h1>
-            <p class="subtitle">88 AI prompts for product management, strategy, and operations</p>
+            <p class="subtitle" id="subtitle">AI prompts for product management, strategy, and operations</p>
         </header>
 
         <div class="search-section">
-            <input 
-                type="text" 
-                class="search-box" 
-                id="searchBox" 
+            <input
+                type="text"
+                class="search-box"
+                id="searchBox"
                 placeholder="Search prompts by name, use case, or keywords..."
             >
+            <div class="search-hint">Press <kbd>Ctrl</kbd> + <kbd>K</kbd> to search</div>
             
             <div class="filters">
                 <div class="filter-group">
@@ -515,9 +545,12 @@
             const text = document.getElementById('modalPrompt').textContent;
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.querySelector('.copy-btn');
-                const originalText = btn.textContent;
                 btn.textContent = '✓ Copied!';
-                setTimeout(() => btn.textContent = originalText, 2000);
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 Copy Prompt';
+                    btn.classList.remove('copied');
+                }, 2000);
             });
         }
 
@@ -567,23 +600,34 @@
         window.addEventListener('DOMContentLoaded', () => {
             allPrompts = window.promptsData || [];
             filteredPrompts = allPrompts;
-            
+
+            // Auto-sync prompt count in header
+            document.getElementById('subtitle').textContent =
+                `${allPrompts.length} AI prompts for product management, strategy, and operations`;
             document.getElementById('totalCount').textContent = allPrompts.length;
             document.getElementById('filteredCount').textContent = allPrompts.length;
-            
+
             initializeFilters();
             renderPrompts();
-            
+
             document.getElementById('searchBox').addEventListener('input', applyFilters);
             document.getElementById('categoryFilter').addEventListener('change', applyFilters);
             document.getElementById('toolFilter').addEventListener('change', applyFilters);
             document.getElementById('techniqueFilter').addEventListener('change', applyFilters);
-            
-            // Close modal on escape key
+
+            // Keyboard shortcuts
             document.addEventListener('keydown', (e) => {
+                // Close modal on escape key
                 if (e.key === 'Escape') closeModal();
+
+                // Focus search on Ctrl+K or Cmd+K
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.getElementById('searchBox').focus();
+                    document.getElementById('searchBox').select();
+                }
             });
-            
+
             // Close modal on background click
             document.getElementById('promptModal').addEventListener('click', (e) => {
                 if (e.target.id === 'promptModal') closeModal();
