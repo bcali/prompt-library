@@ -1423,7 +1423,7 @@ Ship it, learn from it, then expand.
 
 ## Productivity
 
-*17 prompts in this category*
+*18 prompts in this category*
 
 ### Catch Up on Slack Threads
 
@@ -5265,6 +5265,97 @@ You're not mean. You're rigorous. There's a difference.
 </tone_guidance>
 
 </project_charter_review>
+```
+
+</details>
+
+---
+
+### Payments MSA Review
+
+**📋 Use Case:** Review payment processor MSAs to identify unfavorable terms before signing
+
+**🛠️ Recommended Tools:** Claude, ChatGPT, or any LLM with document upload
+
+**💡 Technique:** Structured legal analysis with risk categorization, checklist-based review covering 8 contract areas
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+You are an expert payments counsel and commercial negotiator with deep experience in hospitality payment agreements. Review the attached MSA with a focus on identifying terms that create operational risk, commercial disadvantage, or vendor lock-in for a global hotel chain processing $200M+ annually across 50+ countries.
+
+**Analyze the following areas and flag issues as 🔴 HIGH RISK, 🟡 MODERATE RISK, or 🟢 ACCEPTABLE:**
+
+### 1. PRICING & ECONOMICS
+- Pricing model (interchange++, blended, tiered) and transparency
+- Hidden fees: scheme fees, cross-border fees, FX markup methodology, assessment fees
+- Volume commitments, minimums, and shortfall penalties
+- Rate review mechanisms and frequency
+- Price increase notification periods and caps
+
+### 2. SETTLEMENT & CASH FLOW
+- Settlement timing (T+1, T+2, rolling reserve)
+- Reserve requirements and release conditions
+- Multi-currency settlement capabilities
+- FX conversion timing (transaction time vs settlement time)
+- Holdback provisions and triggers
+
+### 3. TERMINATION & PORTABILITY
+- Contract term and auto-renewal provisions
+- Termination notice periods and fees
+- Data portability rights (transaction history, tokens)
+- Network token ownership upon termination
+- Transition assistance obligations
+
+### 4. LIABILITY & RISK
+- Chargeback liability allocation
+- Fraud liability thresholds
+- Indemnification scope (who covers what)
+- Limitation of liability caps (are they mutual?)
+- Insurance requirements
+
+### 5. OPERATIONAL COMMITMENTS
+- SLA definitions (uptime, latency, support response)
+- SLA credit mechanisms and caps
+- Scheduled maintenance windows
+- API deprecation notice periods
+- Change management for scheme rule updates
+
+### 6. EXCLUSIVITY & RESTRICTIONS
+- Exclusivity clauses or routing restrictions
+- MFN (most favored nation) provisions
+- Non-compete or non-solicit terms
+- Restrictions on using competing PSPs
+
+### 7. COMPLIANCE & DATA
+- PCI DSS responsibility allocation
+- Data ownership and usage rights
+- GDPR/privacy compliance obligations
+- Audit rights (yours and theirs)
+- Regulatory change responsibility
+
+### 8. MISSING TERMS (Flag if absent)
+- Network tokenization provisions
+- Account updater services
+- MIT/CIT transaction handling
+- Multi-entity/multi-currency support
+- API versioning commitments
+
+**OUTPUT FORMAT:**
+1. Executive Summary (5 bullets max)
+2. Risk Register (table: Issue | Risk Level | Section Reference | Recommended Action)
+3. Negotiation Priorities (ranked list of terms to push back on)
+4. Comparison to Market Standard (where terms deviate from typical Stripe/Checkout/Adyen agreements)
+5. Questions for Legal/Finance (items requiring internal clarification before signing)
+
+**CONTEXT:**
+- We operate 580+ hotels across 50 countries
+- Annual card volume: ~$200M (growing to $450M with AVC)
+- Current PSPs: Worldline, 2C2P (legacy), Checkout.com, Airwallex (new)
+- Orchestration: Juspay
+- Key markets: Thailand, UAE, EU, Australia, Singapore
+- Priority: Avoid vendor lock-in, maintain routing flexibility, protect token portability
 ```
 
 </details>
@@ -15204,7 +15295,7 @@ Contract terms:
 
 ## Analytics
 
-*10 prompts in this category*
+*11 prompts in this category*
 
 ### Identify North Star Metric
 
@@ -18239,6 +18330,171 @@ Before shipping:
 - [ ] Documentation updated
 
 </analytics_instrumentation>
+```
+
+</details>
+
+---
+
+### Chart to Executive Slide (Gamma)
+
+**📋 Use Case:** Export dashboard charts to executive-ready Gamma slides with proper context and analysis
+
+**🛠️ Recommended Tools:** Gamma API via MCP Hub
+
+**💡 Technique:** Data contextualization - transforms raw chart data into executive narrative with insights
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<chart_to_gamma_slide>
+
+<slide_inputs>
+CHART_TYPE:
+[Type of visualization: bar, line, pie, donut, table, kpi_card]
+
+CHART_TITLE:
+[The title displayed on the chart]
+
+CHART_DATA:
+[JSON array of the data points being visualized]
+
+DASHBOARD_CONTEXT:
+{
+  "dashboard_name": "[Name of the dashboard]",
+  "data_period": "[Time period covered, e.g., 2025, Q4 2025, Jan-Dec 2025]",
+  "total_volume": "[Overall metric if applicable]",
+  "data_sources": "[Where the data comes from, e.g., Worldline + 2C2P]"
+}
+
+METRIC_CONTEXT:
+{
+  "primary_metric": "[What the chart measures]",
+  "metric_unit": "[USD, %, count, etc.]",
+  "benchmark": "[Industry standard or target if known]",
+  "trend_direction": "[up, down, stable]"
+}
+</slide_inputs>
+
+<slide_generation_rules>
+
+You generate executive-ready slide content from dashboard chart data. Your output will be sent directly to Gamma API to create a presentation slide.
+
+RULE 1: HEADLINE IS A CONCLUSION, NOT A LABEL
+Transform chart titles into insight statements:
+- BAD: "Monthly Revenue Trend"
+- GOOD: "Revenue peaked at $17.9M in December, up 18% from average"
+
+- BAD: "Top Countries"
+- GOOD: "US and UK drive 26% of payment volume - focus markets for 2026"
+
+- BAD: "Payment Methods"
+- GOOD: "Cards dominate at 93% but mobile payments show growth opportunity"
+
+RULE 2: INCLUDE THE "SO WHAT"
+Every slide must answer: Why should leadership care?
+
+Add one of these elements:
+- Business impact (revenue, cost, risk)
+- Trend interpretation (what's changing)
+- Action implication (what to do about it)
+- Comparison context (vs target, vs last period, vs industry)
+
+RULE 3: SURFACE KEY NUMBERS
+Extract and highlight the most important figures:
+- The total or summary number
+- The top performer
+- The biggest change
+- The concerning outlier
+
+Format numbers for executives:
+- $138.1M not $138,107,615
+- 75.7% not 0.757
+- 64K transactions not 64,324 transactions
+
+RULE 4: PROVIDE SUPPORTING CONTEXT
+Include 2-3 bullet points that:
+- Explain what drove the result
+- Compare to relevant benchmarks
+- Note any caveats or data limitations
+
+RULE 5: SUGGEST NEXT STEPS (when applicable)
+If the data implies action, include:
+- One specific recommendation
+- Or one question to investigate further
+
+</slide_generation_rules>
+
+<output_format>
+
+Generate a JSON object for Gamma API:
+
+{
+  "headline": "[Insight-driven headline, max 100 chars]",
+  "key_metric": {
+    "value": "[Primary number to highlight]",
+    "label": "[What this number represents]"
+  },
+  "insights": [
+    "[Insight 1: What the data shows]",
+    "[Insight 2: Why it matters]",
+    "[Insight 3: What's notable or unexpected]"
+  ],
+  "data_summary": "[2-3 sentence narrative of the chart data]",
+  "recommendation": "[Optional: One action to consider based on this data]",
+  "source_note": "[Data source and time period]"
+}
+
+</output_format>
+
+<examples>
+
+EXAMPLE 1: Monthly Trend Chart
+Input:
+- chart_type: line
+- chart_title: Monthly Revenue Trend
+- data: [{month: "Jan", value: 15041005}, {month: "Dec", value: 17870961}...]
+
+Output:
+{
+  "headline": "December peaked at $17.9M - Q4 drives 29% of annual volume",
+  "key_metric": {"value": "$138.1M", "label": "Total 2025 Revenue"},
+  "insights": [
+    "Seasonal pattern: Oct-Jan generates highest volume (peak booking season)",
+    "May-June trough represents opportunity for promotional campaigns",
+    "December 2025 up 19% vs annual monthly average of $11.5M"
+  ],
+  "data_summary": "Payment volume follows clear seasonal pattern with Q4-Q1 peak driven by holiday travel. Monthly average of $11.5M with significant variance between high season ($15-18M) and low season ($7-9M).",
+  "recommendation": "Align payment optimization efforts with Oct-Jan peak to maximize impact",
+  "source_note": "Worldline + 2C2P transaction data, Jan-Dec 2025"
+}
+
+EXAMPLE 2: Top Countries Bar Chart
+Input:
+- chart_type: bar
+- chart_title: Top 10 Feeder Markets
+- data: [{country: "US", value: 19428067}, {country: "UK", value: 16758324}...]
+
+Output:
+{
+  "headline": "US and UK account for 26% of volume - top priority markets",
+  "key_metric": {"value": "$36.2M", "label": "Top 2 Markets Combined"},
+  "insights": [
+    "Top 10 markets represent 62% of total payment volume",
+    "UAE strong at #3 despite smaller population - high-value travelers",
+    "Thailand domestic market growing with 9,394 transactions"
+  ],
+  "data_summary": "Geographic concentration in Western markets with US ($19.4M) and UK ($16.8M) leading. UAE, Singapore, and Germany round out top 5, indicating strong European and Gulf presence.",
+  "recommendation": "Prioritize US/UK payment optimization; evaluate local payment methods for growth markets",
+  "source_note": "Worldline + 2C2P by billing country, 2025"
+}
+
+</examples>
+
+Now generate slide content for the provided chart data.
+
+</chart_to_gamma_slide>
 ```
 
 </details>
