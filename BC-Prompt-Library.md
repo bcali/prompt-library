@@ -25859,3 +25859,94 @@ RULES:
 </details>
 
 ---
+
+
+### Copilot: Weekly Email Deep Search
+
+**Use Case:** Run in Microsoft 365 Copilot to search ALL Outlook folders (Inbox, Sent, Archive, Deleted, Junk, subfolders) and produce a comprehensive action-oriented email summary
+
+**Recommended Tools:** Microsoft 365 Copilot (Outlook)
+
+**Technique:** Exhaustive multi-folder search with action-based categorization (action required, waiting on others, decisions made, key updates) plus overdue reply detection
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+Search through ALL of my Outlook email folders from the last 7 days — this includes Inbox, Sent Items, Archive, Deleted Items, Junk, Drafts, and every subfolder or nested folder I have. Do not limit your search to just the Inbox. I need a complete picture of my email activity.
+
+For each email or thread you find, assess whether it relates to any of these topics:
+- Payments, payment processing, payment gateways, PSP, PCI compliance
+- Juspay, Oracle PMS (OWS/OHIP), Forter, Worldline, 2C2P, Checkout.com, Airwallex
+- Hotel technology, property management systems, hotel onboarding or rollout
+- Loyalty programs, Discovery Dollars, Viridian, points earning
+- Analytics, reporting, dashboards, data
+- Any project status updates, timeline changes, go-live dates, or launch plans
+- Any escalations, blockers, risks, or issues raised
+- Any decisions requested or made
+- Budget, contracts, vendor negotiations, procurement
+- Team changes, resource allocation, hiring for program roles
+
+Now produce the following structured summary:
+
+## ACTION REQUIRED — Emails Where I Need To Do Something
+
+For each email where I am expected to take action, reply, approve, review, or make a decision:
+
+**Subject:** [full subject line]
+**From:** [sender name and email] | **Date:** [date sent]
+**Folder found in:** [which folder this was in]
+**What's needed from me:** [specific action required — be precise]
+**Deadline:** [if any deadline is mentioned or implied]
+**Thread summary:** [2-3 sentence summary of the full thread context]
+
+---
+
+## WAITING ON OTHERS — Emails Where I'm Waiting For a Response
+
+For each email I sent that has not received a reply, or where someone committed to get back to me:
+
+**Subject:** [full subject line]
+**Sent to:** [recipient(s)] | **Date I sent/they committed:** [date]
+**What I'm waiting for:** [what was asked or promised]
+**How long overdue:** [if past any stated deadline]
+
+---
+
+## DECISIONS MADE — Emails Where Something Was Decided
+
+For any thread where a decision was reached, approval was given, or direction was set:
+
+**Subject:** [full subject line]
+**Decision:** [what was decided]
+**Decided by:** [who made the call]
+**Date:** [when]
+**Impact:** [what this means going forward]
+
+---
+
+## KEY UPDATES — Important Information I Should Know
+
+For significant updates, announcements, or status changes (even if no action from me):
+
+**Subject:** [full subject line]
+**From:** [sender] | **Date:** [date]
+**Summary:** [what happened or changed]
+
+---
+
+## WEEK OVERVIEW
+
+- **Total emails found across all folders:** [count]
+- **Emails requiring my action:** [count]
+- **Emails where I'm waiting on others:** [count]
+- **Top 3 themes this week:** [bullet points]
+- **Anything flagged as urgent or escalated:** [list or "None"]
+- **Emails from people I haven't replied to in 3+ days:** [list or "None"]
+
+Be thorough. I would rather have too much information than miss something important. If you're unsure whether an email is relevant, include it. Do not summarize folders you skipped — I need you to check every folder.
+```
+
+</details>
+
+---
