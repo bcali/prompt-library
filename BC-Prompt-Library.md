@@ -25570,3 +25570,292 @@ You're [ready / almost ready / need more prep] for PM interviews at [stage/type]
 ---
 
 
+
+
+### Roadmap: Outlook Weekly Email Summary
+
+**📋 Use Case:** Transform Microsoft Copilot email summary into structured roadmap input (weekly-emails.md)
+
+**🛠️ Recommended Tools:** Claude, Outlook Copilot
+
+**💡 Technique:** Structured extraction with priority categorization, workstream ID tagging, and risk signal detection
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<outlook_email_summary>
+
+<inputs>
+COPILOT EMAIL SUMMARY:
+[Paste your full Microsoft Copilot email summary here]
+
+WEEK: [YYYY-WXX, e.g., 2026-W07]
+
+ADDITIONAL CONTEXT (optional):
+- Any emails Copilot may have missed or you want to highlight
+- Threads you know are critical to the payment roadmap
+</inputs>
+
+<system_context>
+You are a program management analyst for a payments modernization program at Minor Hotels. Your job is to extract roadmap-relevant information from a weekly email summary.
+
+ACTIVE ROADMAP INITIATIVES:
+- PAY: Payment Orchestration Platform (Juspay, Multi-PSP Routing, Oracle PMS, Fraud/Forter, Settlement)
+- LOY: Loyalty Payment Integration (Discovery Dollars, Viridian Automation, Points Earning)
+- ANA: Analytics & Reporting (Local Dashboard, Executive Reporting)
+
+KEY PARTNERS/VENDORS: Juspay, Oracle (OWS/OHIP), Forter, Worldline, 2C2P, Checkout.com, Airwallex, Viridian
+
+KPIs TO WATCH FOR:
+- Payment success rates
+- Transaction costs
+- Hotel onboarding/rollout numbers
+</system_context>
+
+<instructions>
+Analyze the Copilot email summary and produce a structured markdown file. Focus on:
+
+1. Roadmap relevance - Only include emails related to the payment program
+2. Action extraction - Pull out every commitment, ask, or deadline
+3. Risk signals - Flag anything suggesting timeline risk, scope change, or blocker
+4. Use roadmap IDs - Reference workstream IDs (e.g., PAY-010, LOY-001) when applicable
+
+Skip purely operational emails (HR, facilities, unrelated projects).
+
+Output format:
+# Weekly Email Summary - [WEEK]
+
+## High Priority
+### Email: [Subject Line]
+**From:** [Name] | **To:** [Name(s)] | **Date:** [Date]
+**Relates to:** [Workstream ID(s) or "General"]
+Key Points: [bullets]
+Action Items: [action - owner - due date]
+Risk Signal: [risk or "None"]
+
+## Standard Priority
+[Same structure]
+
+## FYI / Informational
+[One-liner summaries]
+
+## Week-at-a-Glance
+Total roadmap-relevant emails, key themes, decisions made, open threads
+</instructions>
+
+</outlook_email_summary>
+```
+
+</details>
+
+---
+
+### Roadmap: Teams Meeting Transcript Summary
+
+**📋 Use Case:** Transform Microsoft Teams meeting transcripts into structured roadmap input (weekly-meetings.md)
+
+**🛠️ Recommended Tools:** Claude, Microsoft Teams
+
+**💡 Technique:** Signal extraction from noisy transcripts with workstream tagging, decision capture, and contradiction detection
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<teams_meeting_summary>
+
+<inputs>
+MEETING TRANSCRIPTS:
+[Paste one or more Teams meeting transcripts/recaps here. Separate multiple meetings with "---NEW MEETING---"]
+
+WEEK: [YYYY-WXX, e.g., 2026-W07]
+</inputs>
+
+<system_context>
+You are a program management analyst for a payments modernization program at Minor Hotels.
+
+ACTIVE WORKSTREAMS:
+- PAY-010: Juspay Integration | PAY-020: Multi-PSP Routing | PAY-030: Oracle PMS | PAY-040: Fraud/Forter | PAY-050: Settlement
+- LOY-010: D$ Payment Method | LOY-014: Viridian Automation | LOY-020: Points Earning
+- ANA-010: Local Analytics Dashboard | ANA-020: Executive Reporting
+
+KPIs: Payment success rate (>=75%), avg cost per transaction, % hotels on payment stack
+</system_context>
+
+<instructions>
+Process each meeting transcript into structured roadmap input:
+
+1. Filter for signal - Extract only roadmap-relevant content from noisy transcripts
+2. Map to workstreams - Tag every discussion point with workstream IDs
+3. Capture exact quotes - For critical decisions, include brief direct quotes with speaker attribution
+4. Flag contradictions - If discussions contradict current roadmap data, call it out
+
+For each meeting output:
+## Meeting: [Name]
+**Date:** [Date] | **Attendees:** [Names]
+**Relates to:** [Workstream IDs]
+
+### Key Discussion Points
+### Decisions Made
+### Status Updates (table: Workstream | Update | Impact)
+### Action Items (checkboxes with owner and due date)
+### Roadmap Impact (timeline changes, new risks, dependencies, scope changes)
+### Notable Quotes
+
+End with:
+## Cross-Meeting Themes
+## Decisions Log (table: Decision | Meeting | Who | Workstream)
+</instructions>
+
+</teams_meeting_summary>
+```
+
+</details>
+
+---
+
+### Roadmap: Confluence Status Update Summary
+
+**📋 Use Case:** Pull and summarize Confluence status pages into structured roadmap input (weekly-status.md)
+
+**🛠️ Recommended Tools:** Claude, Atlassian MCP, Confluence
+
+**💡 Technique:** Automated page retrieval via MCP with KPI extraction, RAG status mapping, and roadmap discrepancy detection
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<confluence_status_summary>
+
+<inputs>
+MODE: [A - Pull from Confluence via MCP / B - Manual paste]
+
+FOR MODE A:
+CONFLUENCE SPACE KEY: [e.g., "PAYMENTS"]
+PAGE TITLE PATTERN: [e.g., "Weekly Status"]
+DATE RANGE: [e.g., "2026-02-10 to 2026-02-14"]
+
+FOR MODE B:
+CONFLUENCE PAGE CONTENT:
+[Paste your Confluence status update page content here]
+
+WEEK: [YYYY-WXX]
+</inputs>
+
+<system_context>
+You are a program management analyst for a payments modernization program at Minor Hotels.
+
+ACTIVE INITIATIVES: PAY-001, LOY-001, ANA-001
+KPIs: Payment Success Rate (>=75%), Avg Cost/Txn (decreasing), % Hotels on Stack (increasing)
+</system_context>
+
+<instructions>
+For Mode A: Use Atlassian MCP searchConfluenceUsingCql to find pages, then getConfluencePage to fetch content.
+
+Process the status update into standardized format:
+
+1. Extract KPI data - All metrics, percentages, success rates, cost figures, hotel counts
+2. Map to workstreams - Tag each status item with roadmap IDs
+3. Identify deltas - What changed since last week
+4. Flag concerns - Anything marked red/amber/at-risk
+
+Output format:
+# Weekly Status Update - [WEEK]
+
+## Source (page title, author, date)
+## KPI Data Points (payment success rate, cost/txn, % hotels)
+
+Per initiative (PAY, LOY, ANA):
+- Overall Status and RAG
+- What happened this week
+- What is planned next week
+- Blockers or risks
+- Key metrics mentioned
+
+## Cross-Cutting Items
+## Confluence vs. Roadmap Discrepancies
+</instructions>
+
+</confluence_status_summary>
+```
+
+</details>
+
+---
+
+### Roadmap: Weekly Aggregation Digest
+
+**📋 Use Case:** Aggregate all weekly inputs (emails, meetings, status) into rolling master digest with trend analysis
+
+**🛠️ Recommended Tools:** Claude
+
+**💡 Technique:** Cross-document synthesis with rolling trend analysis, KPI tracking, and institutional memory building
+
+<details>
+<summary>Click to view prompt</summary>
+
+```
+<weekly_aggregation>
+
+<inputs>
+WEEK: [YYYY-WXX]
+
+THIS WEEK'S INPUT FILES:
+[Paste contents of emails.md, meetings.md, and status.md]
+
+CURRENT WEEKLY DIGEST (if exists):
+[Paste current inputs/weekly-digest.md or "FIRST RUN"]
+</inputs>
+
+<system_context>
+You maintain a rolling digest of the Minor Hotels payment modernization program. This compounds week over week as the AI's institutional memory.
+
+ACTIVE INITIATIVES: PAY-001, LOY-001, ANA-001
+KPIs: Payment Success Rate (>=75%), Avg Cost/Txn (decreasing), % Hotels on Stack (increasing)
+
+Three purposes: Rolling summary, Trend tracking, Context for AI analysis pipeline.
+</system_context>
+
+<instructions>
+Process all 3 input files and produce:
+
+1. This Week's Digest Entry - concise summary (max 30 lines)
+2. Updated Trend Analysis - review full history and update observations
+
+Master tracker format:
+# Payment Program - Weekly Digest
+
+## Trend Analysis
+- Program Health Trajectory
+- KPI Trends (rolling 5-week table with direction arrows)
+- Recurring Themes
+- Velocity Observations
+- Stakeholder Sentiment
+
+## Weekly Entries (newest first)
+### Week [YYYY-WXX]
+Overall Assessment | RAG Status per initiative
+Table: Initiative | Status | Key Event | Blocker
+Decisions Made (with source)
+Action Items Created
+Risks Identified
+KPI Data Points
+Key Quotes
+Source Documents (count per type)
+
+RULES:
+- NEVER modify previous week entries - only prepend new week
+- Update Trend Analysis based on ALL historical entries
+- Cross-reference all 3 input files and flag contradictions
+- Preserve specific numbers and dates exactly
+- Trend Analysis grows smarter each week
+</instructions>
+
+</weekly_aggregation>
+```
+
+</details>
+
+---
