@@ -25950,3 +25950,21 @@ Be thorough. I would rather have too much information than miss something import
 </details>
 
 ---
+
+
+### Enhanced Weekly Status Update
+
+**📋 Use Case:** Weekly status workflow: collect KPIs + epic changes, update roadmap.json + kpis.json on GitHub, publish Confluence status page with 10-workstream summary
+
+**🛠️ Recommended Tools:** Claude, Atlassian MCP, GitHub MCP
+
+**💡 Technique:** Structured input collection with chat pre-fill, triple-output generation (GitHub data + Confluence narrative), workstream-aligned status tracking
+
+<details>
+<summary>Click to view prompt</summary>
+
+See `add_enhanced_status_prompt.py` for full prompt content.
+
+</details>
+
+---
